@@ -1,0 +1,43 @@
+﻿@model WeatherRequest.Models.WeatherRequestModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        .custom-container {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .custom-form {
+            background-color: rgba(10,23,55,0.5);
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-container">
+        <div class="custom-form">
+            <h4 class="">Weather Request</h4>
+            <form asp-action="Response" method="post">
+                <div class="input-group">
+                    <input asp-for="CityName" type="text" class="form-control" />&nbsp;
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
