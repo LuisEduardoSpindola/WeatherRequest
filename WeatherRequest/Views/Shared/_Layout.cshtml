@@ -7,12 +7,16 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/WeatherRequest.styles.css" asp-append-version="true" />
+    <style>
+        .main{
+            background-image: url("https://w.forfun.com/fetch/87/8793f1ea400f6df3b2febb081c63f194.jpeg");
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <main role="main">
-            @RenderBody()
-        </main>
+    <div class="main">
+        @RenderBody();
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

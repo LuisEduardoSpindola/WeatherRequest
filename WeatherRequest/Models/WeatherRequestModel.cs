@@ -6,8 +6,6 @@ namespace WeatherRequest.Models
     {
         [Required]
 
-        public string CityUrl { get; set; }
-
         public double Latitude { get; set; }
 
         public double Longitude { get; set; }
@@ -25,6 +23,7 @@ namespace WeatherRequest.Models
         public string Main { get; set; }
 
         public string Description { get; set; }
+
 
         public string Icon { get; set; }
 

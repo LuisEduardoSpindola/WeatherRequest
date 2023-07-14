@@ -1,15 +1,18 @@
 ﻿using System.Text.Json;
 using WeatherRequest.Models;
 
+// Test: https://api.openweathermap.org/data/2.5/weather?lat=51.5156177&lon=-0.0919983&lang=pt-br&appid=6006483820e66b91c515696f4559a2bf
+
 namespace WeatherRequest.Services
 {
     public class GetWeatherState
     {
         private string apiKey = "6006483820e66b91c515696f4559a2bf";
+        public string lang = "pt-br";
 
-        public async Task<WeatherRequestModel> GetCoordinatesByCityName(WeatherRequestModel model)
+        public async Task<WeatherRequestModel> GetWeatherByCoordinates(WeatherRequestModel model)
         {
-            string weatherUrl = $"https://api.openweathermap.org/data/2.5/weather?lat={model.Latitude}&lon={model.Longitude}&appid={apiKey}";
+            string weatherUrl = $"https://api.openweathermap.org/data/2.5/weather?lat={model.Latitude}&lon={model.Longitude}&appid={apiKey}&lang=pt_br&units=metric";
 
             using (HttpClient client = new HttpClient())
             {
@@ -19,6 +22,7 @@ namespace WeatherRequest.Services
                     var json = await response.Content.ReadAsStringAsync();
                     var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
                     var result = JsonSerializer.Deserialize<WeatherResponse>(json, options);
+
 
                     string country = result.sys.country;
                     float temp = result.main.temp;

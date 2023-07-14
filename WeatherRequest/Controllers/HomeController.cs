@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using WeatherRequest.Models;
 using WeatherRequest.Services;
 
@@ -19,13 +21,26 @@ namespace WeatherRequest.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Response(WeatherRequestModel model)
+        public async Task<IActionResult> Response(WeatherRequestModel model) 
         {
             // Lógica para obter as coordenadas
-            GetWeatherState getWeatherState = new GetWeatherState();
-            WeatherRequestModel result = await getWeatherState.GetCoordinatesByCityName(model);
+            GetCoordinates getCoordinates = new GetCoordinates();
+            WeatherRequestModel coordinatesResult = await getCoordinates.GetCoordinatesByCityName(model);
 
-            return View(result);
+            // Verifica se as coordenadas foram obtidas corretamente
+            if (coordinatesResult != null)
+            {
+                // Lógica para obter as informações climáticas
+                GetWeatherState getWeatherState = new GetWeatherState();
+                WeatherRequestModel weatherResult = await getWeatherState.GetWeatherByCoordinates(coordinatesResult);
+
+                if (weatherResult != null)
+                {
+                    return View(weatherResult);
+                }
+            }
+
+            return View("Error");
         }
     }
 }
